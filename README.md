@@ -1,6 +1,6 @@
 # RestServer node 
 
-restServer orientado a objetos basico echo en node 
+RestServer orientado a objetos basico echo en node 
 
 ## runs scripts
 
