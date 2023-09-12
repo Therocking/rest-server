@@ -25,17 +25,8 @@ const existeUsuarioPorId = async( id = '' ) => {
 
 };
 
-const esAdminId = async( id = '' ) => {
-
-    // validar si el id del usuario tiene el rol de admin
-    const usuarioAdmin = await Usuario.findById(id);
-    if ( usuarioAdmin.rol !== 'ADMIN_ROLE' ) throw new Error(ID_NO_ES_ADMIN)
-
-}
-
 module.exports = {
     validarRol,
     existeCorreo,
     existeUsuarioPorId,
-    esAdminId,
 }

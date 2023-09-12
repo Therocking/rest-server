@@ -4,8 +4,8 @@ require('colors');
 
 const Usuario = require('../models/usuario');
 
-
 const usuariosGet = async(req, res = response) => {
+    
     const { limite = 4, desde = 0 } = req.query;
     const query = { estado: true } // regresa solo los usuarios activos(estado: true).
     

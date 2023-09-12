@@ -1,10 +1,12 @@
 
 const dic_errors = {
+    // ERRORES AUTENTICACION
+    USUARIO_INEXISTENTE: 'Usuario No Existe',
+    ERROR_AUTH: 'correo / password no son correctos',
     // ERRORES CORREO
-    CORREO_INVALIDO: 'Correo Invalido',
+    CORREO_INVALIDO: 'El Correo Es Valido',
     CORREO_REQUERIDO: 'El Correo Es Obligatorio',
     CORREO_EN_USO: 'Ese Correo Ya Esta En Uso',
-    CORREO_INCORRECTO: 'Correo Incorrecto',
     //ERRORES PASSWORD
     PASSWORD_INVALIDO: 'El Password Debe Tener Mas De 6 Caracteres',
     PASSWORD_REQUERIDO: 'El Password Es Obligatorio',
@@ -17,6 +19,13 @@ const dic_errors = {
     // ERRRORES ID
     ID_NO_EXISTE: 'No existe un usuario con ese ID',
     ID_NO_ES_ADMIN: 'El ID no tiene previlegios de administrador para realizar esa accion',
+    // ERRORES TOKEN
+    TOKEN_EN_PETICION: 'No Hay Token En La Peticion',
+    TOKEN_INVALIDO: 'Token No Valido',
+    TOKEN_NO_CREADO: 'No Se Pudo Crear El Token',
+    TOKEN_EXPIRADO: 'El Token Ha Expirado',
+    // ERRORES SISTEMA
+    SISTEMA_ERROR: 'algo salio mal. Hable con el administrador.',
 }
 
 module.exports = { ...dic_errors };
