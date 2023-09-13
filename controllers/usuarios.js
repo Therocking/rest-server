@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 require('colors');
 
 const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/generarJWT');
 
 const usuariosGet = async(req, res = response) => {
     
@@ -35,7 +36,13 @@ const usuariosPost = async(req = request, res = response) => {
     // guardar en db
     await usuario.save();
 
-    res.status(201).json(usuario);
+    // generar jwt
+    const token = await generarJWT( usuario.id );
+
+    res.status(201).json({
+        usuario,
+        token
+    });
     
 };
 

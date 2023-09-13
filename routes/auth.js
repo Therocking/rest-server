@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { login, register } = require('../controllers/auth');
+const { login, register, loginGoogle } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
-const { CORREO_REQUERIDO, PASSWORD_REQUERIDO } = require('../errors/dic_errors');
+const { CORREO_REQUERIDO, PASSWORD_REQUERIDO, TOKEN_GOOGLE } = require('../errors/dic_errors');
 
 const router = Router();
 
@@ -13,8 +13,10 @@ router.post('/login',[
     validarCampos
 ],login);
 
-router.post('/register',register)
-
+router.post('/google',[
+    check('id_token', TOKEN_GOOGLE).not().isEmpty(),
+    validarCampos
+],loginGoogle);
 
 
 module.exports = router;

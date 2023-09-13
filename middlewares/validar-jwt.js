@@ -17,9 +17,9 @@ const validarToken = async(req=request, res=response, next) => {
         
         const {uid} = jwt.verify(token, process.env.PUBLIC_OR_SECRET_KEY,);
 
-        const usuario = await Usuario.findById(uid);; // crea una nueva propieda en el obj req
+        const usuario = await Usuario.findById(uid);
 
-        req.usuario = usuario;
+        req.usuario = usuario; // crea una nueva propieda en el obj req
 
         if ( !usuario ) {
             return res.status(401).json({

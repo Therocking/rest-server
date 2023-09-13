@@ -24,6 +24,8 @@ const dic_errors = {
     TOKEN_INVALIDO: 'Token No Valido',
     TOKEN_NO_CREADO: 'No Se Pudo Crear El Token',
     TOKEN_EXPIRADO: 'El Token Ha Expirado',
+    TOKEN_GOOGLE: 'El Id_Token De Google Es Necesario',
+    TOKEN_GOOGLE_VERIFY: 'El Token No Pudo Ser Verificado',
     // ERRORES SISTEMA
     SISTEMA_ERROR: 'algo salio mal. Hable con el administrador.',
 }

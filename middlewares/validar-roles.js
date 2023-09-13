@@ -18,7 +18,7 @@ const validarAdminRole = (req=request, res=response, next) => {
 
 
     next();
-};
+}; // No se esta usando. Verifica que el token sea de un admin
 
 const validarRoles = ( ...roles ) => {
 
