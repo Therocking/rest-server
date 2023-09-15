@@ -12,7 +12,6 @@ const dbConnection = async() => {
         console.log('Base de datos conectada');
         
     } catch (error) {
-        console.log('Error al conectar base de datos.\n Error en database/config.js');
         console.log(error);
     };
 };

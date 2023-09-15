@@ -4,7 +4,7 @@ const dic_errors = {
     USUARIO_INEXISTENTE: 'Usuario No Existe',
     ERROR_AUTH: 'correo / password no son correctos',
     // ERRORES CORREO
-    CORREO_INVALIDO: 'El Correo Es Valido',
+    CORREO_INVALIDO: 'El Correo No Es Valido',
     CORREO_REQUERIDO: 'El Correo Es Obligatorio',
     CORREO_EN_USO: 'Ese Correo Ya Esta En Uso',
     //ERRORES PASSWORD
@@ -19,6 +19,7 @@ const dic_errors = {
     // ERRRORES ID
     ID_NO_EXISTE: 'No existe un usuario con ese ID',
     ID_NO_ES_ADMIN: 'El ID no tiene previlegios de administrador para realizar esa accion',
+    ID_NO_ES_VALIDO: 'El ID No Es Valido',
     // ERRORES TOKEN
     TOKEN_EN_PETICION: 'No Hay Token En La Peticion',
     TOKEN_INVALIDO: 'Token No Valido',

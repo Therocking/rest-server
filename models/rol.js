@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const { ROL_INVALIDO } = require("../errors/dic_errors");
 
-const rolSchema = Schema({
+const RolSchema = Schema({
     rol: {
         type: String,
         required: [true, ROL_INVALIDO]
@@ -9,4 +9,4 @@ const rolSchema = Schema({
 });
 
 
-module.exports = model('Rol', rolSchema);
+module.exports = model('Rol', RolSchema);

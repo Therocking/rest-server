@@ -8,11 +8,11 @@ const { generarJWT } = require('../helpers/generarJWT');
 const usuariosGet = async(req, res = response) => {
     
     const { limite = 4, desde = 0 } = req.query;
-    const query = { estado: true } // regresa solo los usuarios activos(estado: true).
+    const query = { estado: true } 
     
     // promesas se cumplen al mismo tiempo - no se bloquean.
     const [total, usuarios] = await Promise.all([
-        Usuario.countDocuments(query),
+        Usuario.countDocuments(query), // regresa solo los usuarios activos(estado: true).
         Usuario.find(query)
         .skip( desde )
         .limit( limite )
@@ -59,7 +59,7 @@ const usuariosPut = async(req, res = response) => {
         resto.password = bcrypt.hashSync( password, salt );
     }
 
-    const usuario = await Usuario.findByIdAndUpdate( id, resto )
+    const usuario = await Usuario.findByIdAndUpdate( id, resto, {new: true} )
 
     res.json(usuario);
    
@@ -72,7 +72,7 @@ const usuariosDel = async(req, res = response) => {
     // const usuarioDel = await Usuario.findByIdAndDelete(id);
 
     // mantiene la referencia de usuario - recomendado 
-    const usuario = await Usuario.findByIdAndUpdate( id, {estado: false} );
+    const usuario = await Usuario.findByIdAndUpdate( id, {estado: false}, {new: true});
 
     res.json(usuario);
 };

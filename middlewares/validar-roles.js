@@ -2,7 +2,7 @@ const { request, response } = require("express");
 const { ID_NO_ES_ADMIN } = require("../errors/dic_errors");
 
 const validarAdminRole = (req=request, res=response, next) => {
-    const {rol} = req.usuario;
+    const { rol } = req.usuario;
     
     if ( !req.usuario ) {
         return res.status(500).json({

@@ -13,15 +13,24 @@ const router = Router();
 router.get('/:id',[
     validarToken,
     validarRoles('ADMIN_ROLE', 'VENTAS_ROLE'),
+    validarCampos,
     check('id', 'ID no valido').isMongoId(),
+    validarCampos,
     check('id').custom(existeUsuarioPorId),
     validarCampos
 ], usuariosGet);
 
 router.post('/',[ // middlewares - validacion
     check('nombre', NOMBRE_REQUERIDO).not().isEmpty(),
+    validarCampos,
     check('password', PASSWORD_INVALIDO).isLength({ min: 6 }),
+    validarCampos,
     check('correo', CORREO_INVALIDO).isEmail().custom( existeCorreo ),
+    validarCampos,
+    check('correo').custom( existeCorreo ),
+    validarCampos,
+    check('correo').custom( existeCorreo ),
+    validarCampos,
     // check('rol', 'Rol invalido').isIn(['ADMIN_ROLE', 'USER_ROLE']),
     check('rol').custom( validarRol ),
     validarCampos
@@ -30,7 +39,10 @@ router.post('/',[ // middlewares - validacion
 
 router.put('/:id',[
     validarToken,
-    check('id', 'ID no valido').isMongoId().custom(existeUsuarioPorId),
+    check('id', 'ID no valido').isMongoId(),
+    validarCampos,
+    check('rol').custom(existeUsuarioPorId),
+    validarCampos,
     check('rol').custom( validarRol ),
     validarCampos
 ], usuariosPut);
@@ -38,7 +50,9 @@ router.put('/:id',[
 router.delete('/:id',[
     validarToken,
     validarRoles('ADMIN_ROLE', 'VENTAS_ROLE'),
+    validarCampos,
     check('id', 'ID no valido').isMongoId(),
+    validarCampos,
     check('id').custom(existeUsuarioPorId),
     validarCampos,
 ], usuariosDel);
