@@ -1,8 +1,10 @@
 const { Categoria, Usuario, Rol, Producto } = require('../models');
 
-const { ROL_INVALIDO, CORREO_EN_USO, ID_NO_EXISTE, ID_NO_ES_ADMIN } = require('../errors/dic_errors');
+const { ROL_INVALIDO, CORREO_EN_USO, ID_NO_EXISTE, ID_NO_ES_ADMIN, NOMBRE_EN_USO } = require('../errors/dic_errors');
 
-
+/*
+** valida que el rol este permitido
+*/
 const validarRol = async( rol = '' ) => {
 
     // validacion de rol
@@ -10,6 +12,9 @@ const validarRol = async( rol = '' ) => {
     if( !existeRol ) throw new Error(`El rol ${rol}, ${ROL_INVALIDO}`);
 };
 
+/*
+** valida que no hayan dos usuarios con el mismo correo
+*/
 const existeCorreo = async( correo = '' ) => {
 
     // validacion de correo
@@ -17,6 +22,9 @@ const existeCorreo = async( correo = '' ) => {
     if( existeCorreo ) throw new Error( CORREO_EN_USO );
 };
 
+/*
+** valida valida que un usuario exista en la coleccion
+*/
 const existeUsuarioPorId = async( id = '' ) => {
 
     // validacion del id
@@ -24,6 +32,10 @@ const existeUsuarioPorId = async( id = '' ) => {
     if( !existeUsuario ) throw new Error( ID_NO_EXISTE );
 
 };
+
+/*
+** valida que una categoria exista en la coleccion
+*/
 const existeCategoria = async( id = '' ) => {
 
     const categoria = await Categoria.findById(id);
@@ -32,6 +44,9 @@ const existeCategoria = async( id = '' ) => {
 
 };
 
+/*
+** valida que un producto exista en la coleccion
+*/
 const existeProducto = async( id = '' ) => {
 
     const producto = await Producto.findById(id);
@@ -40,15 +55,30 @@ const existeProducto = async( id = '' ) => {
 
 };
 
+/*
+** valida que no hayan dos productos con el mismo nombre
+*/
 const nombreDuplicado = async( nombre = '' ) => {
 
     const nombreDB = nombre.toUpperCase();
 
     const producto = await Producto.findOne({nombre: nombreDB});
 
-    if ( producto ) throw new Error('Ya ahi un producto con ese nombre');
+    if ( producto ) throw new Error(NOMBRE_EN_USO);
 
 };
+
+
+/*
+** valida coleciones permitidas en upload
+*/
+const coleccionesPermitidas = ( coleccion, colecciones = [] ) => {
+
+    if ( !colecciones.includes(coleccion) ) {
+        throw new Error(`La coleccion ${coleccion}, no existe`)
+    }
+    return true;
+}
 
 module.exports = {
     validarRol,
@@ -57,4 +87,5 @@ module.exports = {
     existeCategoria,
     existeProducto,
     nombreDuplicado,
+    coleccionesPermitidas,
 }

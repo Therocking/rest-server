@@ -6,7 +6,7 @@ const { validarRol, existeCorreo, existeUsuarioPorId } = require('../helpers/db-
 
 
 const { validarToken, validarCampos, validarRoles } = require('../middlewares');
-const { NOMBRE_REQUERIDO, PASSWORD_INVALIDO, CORREO_INVALIDO } = require('../errors/dic_errors');
+const { NOMBRE_REQUERIDO, PASSWORD_INVALIDO, CORREO_INVALIDO, ID_NO_ES_VALIDO_MONGO } = require('../errors/dic_errors');
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.get('/:id',[
     validarToken,
     validarRoles('ADMIN_ROLE', 'VENTAS_ROLE'),
     validarCampos,
-    check('id', 'ID no valido').isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeUsuarioPorId),
     validarCampos
@@ -39,7 +39,7 @@ router.post('/',[ // middlewares - validacion
 
 router.put('/:id',[
     validarToken,
-    check('id', 'ID no valido').isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('rol').custom(existeUsuarioPorId),
     validarCampos,
@@ -51,7 +51,7 @@ router.delete('/:id',[
     validarToken,
     validarRoles('ADMIN_ROLE', 'VENTAS_ROLE'),
     validarCampos,
-    check('id', 'ID no valido').isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeUsuarioPorId),
     validarCampos,

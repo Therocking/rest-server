@@ -45,7 +45,7 @@ const buscarUsuarios = async(termino = '', req=request, res=response) => {
     });
 }
 
-// busca categorias por nombre
+// busca categorias por nombre o id
 const buscarCategorias = async(termino = '', req=request, res=response) => {
     const { limite=4, desde=0 } = req.query;
 
@@ -66,7 +66,7 @@ const buscarCategorias = async(termino = '', req=request, res=response) => {
 
     const [total, categorias] = await Promise.all([
         Categoria.countDocuments( { nombre: regex }, query),
-        Categoria.find( { nombre: regex }) // si le agregas la condicion del query te devuelve las categorias con nombre
+        Categoria.find( { nombre: regex, estado: true })
             .skip(desde)
             .limit(limite)
             .populate('usuario', 'nombre')
@@ -78,7 +78,7 @@ const buscarCategorias = async(termino = '', req=request, res=response) => {
     });
 }
 
-// busca productos por nombre
+// busca productos por nombre o id
 const buscarProductos = async(termino = '', req=request, res=response) => {
     const { limite=4, desde=0 } = req.query;
 
@@ -101,7 +101,7 @@ const buscarProductos = async(termino = '', req=request, res=response) => {
 
     const [total, productos] = await Promise.all([
         Producto.countDocuments( { nombre: regex }, query ),
-        Producto.find({ nombre: regex }, query)
+        Producto.find({ nombre: regex, estado: true })
             .skip(desde)
             .limit(limite)
             .populate('usuario', 'nombre')

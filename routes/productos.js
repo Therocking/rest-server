@@ -4,14 +4,14 @@ const { check } = require('express-validator');
 const { validarToken, validarCampos, validarAdminRole } = require('../middlewares');
 const { existeProducto, nombreDuplicado } = require('../helpers/db-validators');
 const { obtenerProductos, obtenerProducto, crearProducto, actualizarProducto, eliminarProducto } = require('../controllers/productos');
-const { NOMBRE_REQUERIDO, ID_NO_ES_VALIDO } = require('../errors/dic_errors');
+const { NOMBRE_REQUERIDO, ID_NO_ES_VALIDO_MONGO } = require('../errors/dic_errors');
 
 const router = Router();
 
 router.get('/', obtenerProductos)
 
 router.get('/:id',[
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom( existeProducto ),
     validarCampos,
@@ -27,7 +27,7 @@ router.post('/',[
 
 router.put('/:id',[
     validarToken,
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('nombre').custom(nombreDuplicado),
     validarCampos,
@@ -39,7 +39,7 @@ router.delete('/:id',[
     validarToken,
     validarAdminRole,
     validarCampos,
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeProducto),
     validarCampos

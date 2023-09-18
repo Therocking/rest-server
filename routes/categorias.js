@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { obtenerCategorias, crearCategoria, obtenerCategoria, actualizarCategoria, borrarCategoria } = require('../controllers/categorias');
 const { validarToken, validarCampos, validarAdminRole } = require('../middlewares');
-const { NOMBRE_REQUERIDO, ID_NO_ES_VALIDO } = require('../errors/dic_errors');
+const { NOMBRE_REQUERIDO, ID_NO_ES_VALIDO_MONGO } = require('../errors/dic_errors');
 const { existeCategoria } = require('../helpers/db-validators');
 
 
@@ -14,7 +14,7 @@ router.get('/', obtenerCategorias);
 
 // obtener categoria por id - publico
 router.get('/:id',[
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeCategoria),
     validarCampos
@@ -30,7 +30,7 @@ router.post('/',[
 // actualizar categoria por id - privado
 router.put('/:id',[
     validarToken,
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeCategoria),
     validarCampos
@@ -40,7 +40,7 @@ router.put('/:id',[
 router.delete('/:id',[
     validarToken,
     validarAdminRole,
-    check('id', ID_NO_ES_VALIDO).isMongoId(),
+    check('id', ID_NO_ES_VALIDO_MONGO).isMongoId(),
     validarCampos,
     check('id').custom(existeCategoria),
     validarCampos
